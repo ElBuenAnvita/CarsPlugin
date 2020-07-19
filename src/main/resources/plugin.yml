@@ -1,0 +1,6 @@
+name: CarsPlugin
+version: ${project.version}
+main: cars.plugin.Plugin
+commands:
+  car:
+    description: Crea o destruye tu carro.

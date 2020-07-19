@@ -1,0 +1,28 @@
+config:
+  normal-speed: "10"
+  boost-speed: "20"
+  reverce-speed: "-10"
+  vulnerable: false
+  Inventory:
+    Reverse:
+      itemON:
+        item: "351:10"
+        name: "&a&lReversa"
+        lore:
+          - "&7Click para deshabilitar la reversa."
+      itemOFF:
+        item: "331"
+        name: "&c&lReversa"
+        lore:
+          - "&7Click para habilitar la reversa."
+    Boost:
+      itemON:
+        item: "369"
+        name: "&a&lAcelerador"
+        lore:
+          - "&7Click para deshabilitar el acelerador."
+      itemOFF:
+        item: "337"
+        name: "&c&lAcelerador"
+        lore:
+          - "&7Click para habilitar el acelerador."
