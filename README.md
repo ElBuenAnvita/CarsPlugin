@@ -1,2 +1,2 @@
 # CarsPlugin
-Un plugin que crea y elimina carritos nomá'
+Crea y maneja vagonetas sobre cualquier terreno, turbo, retroceso y mucho más.
