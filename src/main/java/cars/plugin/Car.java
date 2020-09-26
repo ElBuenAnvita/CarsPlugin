@@ -52,11 +52,7 @@ public class Car {
         }
     }
     public static Boolean hasCar(Player p) {
-        if(cars.containsKey(p)){
-            return true;
-        } else{
-            return false;
-        }
+        return cars.containsKey(p);
     }
     public void setNewInventory(){
         this.inventario = player.getInventory().getContents();

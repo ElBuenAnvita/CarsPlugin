@@ -24,7 +24,11 @@ public class Commands implements CommandExecutor {
                     p.sendMessage("§9§lBOT §fAnviBot §8» §7Tu carro ha desaparecido");
                 }
             }
-            else if(args[0].isEmpty()){
+            else if (args.length == 0) {
+                p.sendMessage("§9§lBOT §fAnviBot §8» §7Incorrecto uso del comando");
+                p.sendMessage("§7Usa §e/car create§7 para crear tu propio carro");
+                p.sendMessage("§7Usa §e/car delete§7 para eliminar tu carro");
+            } else {
                 p.sendMessage("§9§lBOT §fAnviBot §8» §7Incorrecto uso del comando");
                 p.sendMessage("§7Usa §e/car create§7 para crear tu propio carro");
                 p.sendMessage("§7Usa §e/car delete§7 para eliminar tu carro");

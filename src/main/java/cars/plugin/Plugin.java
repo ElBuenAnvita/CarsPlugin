@@ -21,6 +21,8 @@ import org.bukkit.util.Vector;
 import java.util.ArrayList;
 import java.util.List;
 
+import static cars.plugin.Yaw.obtenerYaw;
+
 
 public class Plugin extends JavaPlugin implements Listener {
     private Plugin plugin;
@@ -133,6 +135,7 @@ public class Plugin extends JavaPlugin implements Listener {
                 if(!Car.hasCar(p)){ return; }
                 Car car = Car.getCar(p);
                 car.setNewInventory();
+                p.sendMessage("§9§lBOT §fAnviBot §8» §7Utiliza los controles para acelerar o retroceder. ¡Buen viaje!");
             }
         }
     }
@@ -178,12 +181,12 @@ public class Plugin extends JavaPlugin implements Listener {
             if(!Car.hasCar(p)){ return; }
             Car car = Car.getCar(p);
             Vehicle vee = event.getVehicle();
-            if(p.isSneaking()){
+            /* if(p.isSneaking()){
                 car.PlayersetInventario();
-            }
-            if(car.HasTurbo()){
+            } */
+            if(car.HasTurbo()) {
                 v = p.getLocation().getDirection().multiply(boost_speed);
-            } else if(car.HasReverse()){
+            } else if (car.HasReverse()) {
                 v = p.getLocation().getDirection().multiply(reverce_speed);
             } else {
                 v = p.getLocation().getDirection().multiply(normal_speed);
@@ -192,20 +195,23 @@ public class Plugin extends JavaPlugin implements Listener {
             vee.getLocation().setDirection(v);
             p.getLocation().getYaw();
 
-            if(Yaw.getYaw(p) == Yaw.NORTH && vee.getLocation().add(0,0,-0.7).getBlock().getType() != Material.AIR){
-                vee.setVelocity(new Vector(v.getX(), 1 + 1.0E-4D, v.getZ()));
-            } else if(Yaw.getYaw(p) == Yaw.SOUTH && vee.getLocation().add(0,0,+0.7).getBlock().getType() != Material.AIR){
-                vee.setVelocity(new Vector(v.getX(), 1 + 1.0E-4D, v.getZ()));
-            }else if(Yaw.getYaw(p) == Yaw.WEST && vee.getLocation().add(-0.7,0,0).getBlock().getType() != Material.AIR){
-                vee.setVelocity(new Vector(v.getX(), 1 + 1.0E-4D, v.getZ()));
-            }else if(Yaw.getYaw(p) == Yaw.EAST && vee.getLocation().add(+0.7,0,0).getBlock().getType() != Material.AIR){
-                vee.setVelocity(new Vector(v.getX(), 1 + 1.0E-4D, v.getZ()));
-            }
-            else {
-                event.getVehicle().setVelocity(new Vector(v.getX(), 1.0E-4D, v.getZ()));
-            }
-
+            vee.setVelocity(obtenerYaw(p));
         }
+    }
+    @EventHandler
+    public void onVehicleExitEvent(VehicleExitEvent event) {
+        Vehicle vehicle = event.getVehicle();
+        Entity passenger = vehicle.getPassenger();
+        if(!(passenger instanceof Player)) {
+            return;
+        }
+        Player p = (Player)passenger;
+        if(!Car.hasCar(p)) { return; }
+        Car car = Car.getCar(p);
+
+        car.removeCar(p);
+        car.PlayersetInventario();
+        p.sendMessage("§9§lBOT §fAnviBot §8» §7Tu carro ha desaparecido");
     }
 
     @EventHandler
